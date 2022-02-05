@@ -2,7 +2,7 @@ package com.prueba_fabrica.DTO;
 
 public class ResponseDto {
 
-	private int numConsulta;
+	private long numConsulta;
 	
 	private String month;
 	private String num;
@@ -11,7 +11,7 @@ public class ResponseDto {
 	private String img;
 	private String title;
 	
-	public ResponseDto(int numConsulta, String month, String num, String year, String news, String img, String title) {
+	public ResponseDto(long numConsulta, String month, String num, String year, String news, String img, String title) {
 		super();
 		this.numConsulta = numConsulta;
 		this.month = month;
@@ -26,11 +26,11 @@ public class ResponseDto {
 		
 	}
 
-	public int getnumConsulta() {
+	public long getnumConsulta() {
 		return numConsulta;
 	}
-	public void setnumConsulta(int numConsulta) {
-		this.numConsulta = numConsulta;
+	public void setnumConsulta(long l) {
+		this.numConsulta = l;
 	}
 	public String getMonth() {
 		return month;
@@ -68,5 +68,13 @@ public class ResponseDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+	@Override
+	public String toString() {
+		return "ResponseDto [numConsulta=" + numConsulta + ", month=" + month + ", num=" + num + ", year=" + year
+				+ ", news=" + news + ", img=" + img + ", title=" + title + "]";
+	}
+	
+	
 	
 }
