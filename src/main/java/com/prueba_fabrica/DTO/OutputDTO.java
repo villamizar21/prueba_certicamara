@@ -9,12 +9,10 @@ public class OutputDTO {
         this.INPUT = INPUT;
         this.OUTPUT = OUTPUT;
     }
-
+    public OutputDTO() {
+    }
     public OutputDTO(String INPUT) {
         this.INPUT = INPUT;
-    }
-
-    public OutputDTO() {
     }
 
     public String getINPUT() {
