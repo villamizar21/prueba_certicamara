@@ -14,27 +14,31 @@ import com.prueba_fabrica.repository.RepositoryConsultas;
 @Service
 public class ConsultaService {
 
-	@Autowired
-	private RepositoryConsultas consul;
+    @Autowired
+    private RepositoryConsultas consul;
 
-	private final String URL = "https://xkcd.com/info.0.json";
-	
-	public ResponseDto consultar() {
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<ResponseDto> response = restTemplate.getForEntity(URL, ResponseDto.class);
-		List<ContadorConsultas> list = consul.findAll();
-		if(list.isEmpty()) {
-			ContadorConsultas init = new ContadorConsultas(1,1);
-		}else {
-				ContadorConsultas contador = list.get(0);
-				contador.setNumConsulta(contador.getNumConsulta()+1);
-				consul.save(contador);
-				System.out.print("---------------- prueba----------------" + contador.getNumConsulta());
-		}
-	
-		//var prueba = consul.save(new ContadorConsultas(1, consul.count()+1));
-	
-		response.getBody().setnumConsulta(consul.count() + 1);
-		return response.getBody();
-	}
+
+    private final String URL = "https://xkcd.com/info.0.json";
+
+
+    public ResponseDto consultar() {
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<ResponseDto> response = restTemplate.getForEntity(URL, ResponseDto.class);
+        try {
+            List<ContadorConsultas> list = consul.findAll();
+            if (list.isEmpty()) {
+                ContadorConsultas init = new ContadorConsultas(1, 1);
+            } else {
+                ContadorConsultas contador = list.get(0);
+                contador.setNumConsulta(contador.getNumConsulta() + 1);
+                consul.save(contador);
+                response.getBody().setnumConsulta(contador.getNumConsulta());
+            }
+
+        } catch (Exception e) {
+           throw new IllegalArgumentException();
+        }
+        return response.getBody();
+    }
 }
